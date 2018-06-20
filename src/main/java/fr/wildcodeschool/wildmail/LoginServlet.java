@@ -2,6 +2,7 @@ package fr.wildcodeschool.wildmail;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +20,26 @@ public class LoginServlet extends HttpServlet {
                     .getRequestDispatcher("/login.jsp")
                     .forward(request, response);
         } else {
-            // TODO : write in cookies instead of session
-            request.getSession().setAttribute("email", emailValue);
-            response.sendRedirect(request.getContextPath() + "/home");
+            Cookie cookie = new Cookie("email", emailValue);
+            cookie.setPath("/");
+            cookie.setMaxAge(60 * 60 * 24 * 30);
+            response.addCookie(cookie);
+
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO : load from cookies instead of session
-        String email = (String) request.getSession().getAttribute("email");
+
+        String email = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("email")) {
+                    email = cookie.getValue();
+                }
+            }
+        }
+
         if (email != null && !email.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
@@ -37,3 +49,4 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
+
