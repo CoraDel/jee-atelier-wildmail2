@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String emailValue = request.getParameter("emailValue");
 
         if (emailValue == null || emailValue.isEmpty()) {

@@ -13,14 +13,11 @@
     <title>Login</title>
 </head>
 <body>
-    <!-- TODO : use JSTL instead of scriplet -->
 
-    <%
-        String error = (String) request.getAttribute("error");
-        if (error != null && !error.isEmpty()) {
-    %>
-    <p>${error}</p>
-    <% } %>
+    <c:if test="${not empty requestScope.error}">
+        <p>${error}</p>
+    </c:if>
+
 
     <form method="post" action="${pageContext.request.contextPath}/login">
         <label for="emailId">Email : </label>
