@@ -19,7 +19,6 @@
     <c:forEach items="${requestScope.mails}" var="eachMail">
 <li> From : ${eachMail.from}, To :${eachMail.to} , Content :${eachMail.content}
     <a href="${pageContext.request.contextPath}/mailcontent?id=${eachMail.id}">Open</a> </li><br>
-
     </c:forEach>
 
 

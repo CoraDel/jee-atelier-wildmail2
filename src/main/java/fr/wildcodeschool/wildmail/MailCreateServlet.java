@@ -24,6 +24,7 @@ public class MailCreateServlet extends HttpServlet {
         String content =  request.getParameter("content");
 
         SingletonBDD singletonBDD = SingletonBDD.getInstance();
+
         try {
             PreparedStatement preparedStatement = singletonBDD.getConnection()
                     .prepareStatement("INSERT INTO mail VALUES(null, ?, ?, ?);");

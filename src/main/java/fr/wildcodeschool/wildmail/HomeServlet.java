@@ -61,6 +61,7 @@ public class HomeServlet extends HttpServlet {
                     mailBean.setFrom(from);
                     mailBean.setTo(to);
                     mailBean.setContent(content);
+                    //Ajout de la bean dans la liste
                     mailList.add(mailBean);
                 }
                 request.setAttribute("mails", mailList);
@@ -68,8 +69,6 @@ public class HomeServlet extends HttpServlet {
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
                 e.printStackTrace();
             }
-
-
 
             this.getServletContext()
                     .getRequestDispatcher("/maillist.jsp")
